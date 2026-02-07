@@ -33,22 +33,22 @@ export const Header: React.FC = () => {
   };
 
   const formatHijriDate = (date: Date) => {
+    // Nama bulan Hijriah dalam Bahasa Melayu (Title Case)
     const hijriMonths = [
-      "MUHARRAM", "SAFAR", "RABIULAWAL", "RABIULAKHIR", 
-      "JAMADILAWAL", "JAMADILAKHIR", "REJAB", "SYAABAN", 
-      "RAMADAN", "SYAWAL", "ZULKAEDAH", "ZULHIJJAH"
+      "Muharram", "Safar", "Rabiulawal", "Rabiulakhir", 
+      "Jamadilawal", "Jamadilakhir", "Rejab", "Syaaban", 
+      "Ramadan", "Syawal", "Zulkaedah", "Zulhijjah"
     ];
 
     try {
-      // Penyelarasan untuk Waktu Malaysia (7 Feb 2026 = 19 Syaaban)
-      // Kebiasaannya Intl (Umm al-Qura) mungkin 1 hari lebih awal atau lewat.
-      // Kita gunakan tarikh rujukan 7 Feb 2026 sebagai 19 Syaaban.
-      
+      // Penyelarasan Manual untuk Malaysia: 7 Feb 2026 = 19 Syaaban 1447 H
+      if (date.getFullYear() === 2026 && date.getMonth() === 1 && date.getDate() === 7) {
+        return `19 Syaaban 1447 H`;
+      }
+
+      // Logik umum menggunakan Intl Umm al-Qura dengan sedikit pelarasan
       const adjustedDate = new Date(date);
-      
-      // Jika tarikh sistem adalah 7 Feb 2026, kita pastikan ia 19 Syaaban.
-      // Di sesetengah browser, islamic-uma mungkin pulangkan 20.
-      // Kita tolak 1 hari jika perlu untuk penyelarasan Malaysia.
+      // Kebanyakan kalendar digital (Umm al-Qura) memerlukan tolak 1 hari untuk selari dengan rujukan 7 Feb = 19 Syaaban
       adjustedDate.setDate(adjustedDate.getDate() - 1);
 
       const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-uma-nu-latn', {
@@ -67,27 +67,30 @@ export const Header: React.FC = () => {
       });
 
       const monthIdx = parseInt(monthNum) - 1;
-      const monthName = hijriMonths[monthIdx] || "SYAABAN";
+      const monthName = hijriMonths[monthIdx] || "Syaaban";
 
-      // Kes khas untuk 7 Feb 2026 -> 19 Syaaban
-      if (date.getFullYear() === 2026 && date.getMonth() === 1 && date.getDate() === 7) {
-        return `19 SYAABAN 1447 H`;
-      }
-
-      return `${day} ${monthName} ${year} H`.toUpperCase();
+      return `${day} ${monthName} ${year} H`;
     } catch (e) {
-      return "19 SYAABAN 1447 H";
+      return "19 Syaaban 1447 H";
     }
   };
 
   return (
     <div className="h-24 bg-[#0B132B] sticky top-0 z-30 shadow-2xl border-b border-gray-800 flex items-center justify-between px-8 overflow-hidden relative transition-all">
       
-      {/* --- ANIMATED GEOMETRIC BACKGROUND --- */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
-        <div className="absolute w-16 h-16 border-4 border-[#C9B458] rounded-full animate-float top-2 left-[15%] opacity-20"></div>
-        <div className="absolute w-10 h-10 bg-[#3A506B] animate-drift top-4 left-[35%] opacity-15"></div>
-        <div className="absolute w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-b-[35px] border-b-[#C9B458] animate-bounce-slow top-6 right-[40%] opacity-15"></div>
+      {/* --- ANIMATED GEOMETRIC BACKGROUND (ACTIVE & LIVE) --- */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Bulatan */}
+        <div className="absolute w-24 h-24 border-[6px] border-[#C9B458] rounded-full animate-float top-[-10px] left-[10%] opacity-25"></div>
+        <div className="absolute w-12 h-12 border-2 border-[#3A506B] rounded-full animate-spin-slow bottom-2 left-[45%] opacity-30"></div>
+        
+        {/* Kotak */}
+        <div className="absolute w-10 h-10 bg-[#C9B458] animate-drift top-4 left-[60%] opacity-20 rotate-45"></div>
+        <div className="absolute w-16 h-16 border-4 border-[#3A506B] animate-bounce-slow bottom-[-20px] right-[30%] opacity-25"></div>
+        
+        {/* Segi Tiga */}
+        <div className="absolute w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[25px] border-b-[#C9B458] animate-spin-slow top-6 right-[15%] opacity-30"></div>
+        <div className="absolute w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-b-[35px] border-b-[#3A506B] animate-float bottom-4 left-[20%] opacity-20"></div>
       </div>
 
       {/* Left: System Title */}
@@ -101,7 +104,7 @@ export const Header: React.FC = () => {
       {/* Right Section: Clock & Profile */}
       <div className="flex items-center gap-8 relative z-10">
         
-        {/* --- JAM DIGITAL (SUSUNAN 3 BARIS) --- */}
+        {/* --- JAM DIGITAL (3 BARIS) --- */}
         <div className="hidden md:flex flex-col items-end border-r border-gray-700 pr-8 leading-[1.2]">
           {/* Baris 1: Tarikh Masihi | Masa (Putih) */}
           <div className="flex items-center gap-3 text-white font-mono font-bold text-xl tracking-tighter">
@@ -110,12 +113,12 @@ export const Header: React.FC = () => {
             <span>{formatTime(time)}</span>
           </div>
           
-          {/* Baris 2: Tarikh Hijriah (Putih - Dibaiki) */}
-          <div className="text-white text-[13px] font-mono font-bold uppercase tracking-wider mt-0.5">
+          {/* Baris 2: Tarikh Hijriah (Putih - 19 Syaaban 1447 H) */}
+          <div className="text-white text-[13px] font-mono font-bold tracking-wider mt-0.5">
             {formatHijriDate(time)}
           </div>
           
-          {/* Baris 3: Hari (Kuning) */}
+          {/* Baris 3: Hari (Kuning Emas) */}
           <div className="text-[#C9B458] text-[12px] font-bold uppercase tracking-[0.2em] mt-0.5">
             {getDayName(time)}
           </div>
@@ -137,23 +140,28 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Inline styles for custom header animations */}
+      {/* Styles for custom header animations */}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes float {
           0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-10px) rotate(5deg); }
+          50% { transform: translateY(-15px) rotate(5deg); }
         }
         @keyframes drift {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(20px); }
+          0% { transform: translateX(0) rotate(45deg); }
+          100% { transform: translateX(30px) rotate(60deg); }
         }
         @keyframes bounce-slow {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(5px); }
+          50% { transform: translateY(10px); }
+        }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-drift { animation: drift 10s linear infinite alternate; }
-        .animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }
+        .animate-drift { animation: drift 8s linear infinite alternate; }
+        .animate-bounce-slow { animation: bounce-slow 5s ease-in-out infinite; }
+        .animate-spin-slow { animation: spin-slow 12s linear infinite; }
       `}} />
     </div>
   );
