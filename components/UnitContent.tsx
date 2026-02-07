@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 
@@ -178,11 +179,11 @@ export const UnitContent: React.FC<UnitContentProps> = ({ unit, type }) => {
   const getMockData = () => {
     if (type === 'Jawatankuasa') {
       return [
-        { id: 1, role: 'Pengerusi', position: 'Pengetua', teacherName: 'TN HJ MOHD NAZRI BIN SADALI' },
-        { id: 2, role: 'Timbalan Pengerusi', position: 'GPK Pentadbiran', teacherName: 'EN AHMAD BIN ABDULLAH' },
-        { id: 3, role: 'Naib Pengerusi 1', position: 'GPK HEM', teacherName: 'PN SITI AMINAH BINTI ALI' },
-        { id: 4, role: 'Naib Pengerusi 2', position: 'GPK Kokurikulum', teacherName: 'EN RAZALI BIN OTHMAN' },
-        { id: 5, role: 'Setiausaha', position: 'Guru Kanan', teacherName: 'PN NURUL HUDA BINTI ISMAIL' },
+        { id: 1, role: 'Pengerusi', position: 'Pengetua', teacherName: 'Tn Hj Mohd Nazri Bin Sadali' },
+        { id: 2, role: 'Timbalan Pengerusi', position: 'GPK Pentadbiran', teacherName: 'En Ahmad Bin Abdullah' },
+        { id: 3, role: 'Naib Pengerusi 1', position: 'GPK HEM', teacherName: 'Pn Siti Aminah Binti Ali' },
+        { id: 4, role: 'Naib Pengerusi 2', position: 'GPK Kokurikulum', teacherName: 'En Razali Bin Othman' },
+        { id: 5, role: 'Setiausaha', position: 'Guru Kanan', teacherName: 'Pn Nurul Huda Binti Ismail' },
       ];
     } else {
       return [
@@ -531,7 +532,9 @@ export const UnitContent: React.FC<UnitContentProps> = ({ unit, type }) => {
                             <>
                               <td className="px-6 py-4 font-medium text-white">{item.role}</td>
                               <td className="px-6 py-4 text-gray-300">{item.position}</td>
-                              <td className="px-6 py-4 font-semibold text-[#C9B458] uppercase">{item.teacherName}</td>
+                              <td className="px-6 py-4 font-semibold text-white capitalize">
+                                {item.teacherName?.toLowerCase()}
+                              </td>
                             </>
                           ) : (
                             <>
