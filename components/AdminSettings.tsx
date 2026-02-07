@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { Permissions, SiteConfig } from '../types';
@@ -37,10 +38,10 @@ export const AdminSettings: React.FC = () => {
   return (
     <div className="p-8 space-y-8 fade-in pb-20">
       <div className="border-b border-gray-700 pb-4">
-        <h2 className="text-2xl font-bold text-white font-montserrat flex items-center gap-3">
+        <h2 className="text-2xl font-bold text-[#0B132B] font-montserrat flex items-center gap-3">
           <span>⚙️</span> Tetapan Admin
         </h2>
-        <p className="text-gray-400 mt-1">Konfigurasi kebenaran modul dan pangkalan data.</p>
+        <p className="text-[#0B132B] font-medium opacity-80 mt-1">Konfigurasi kebenaran modul dan pangkalan data.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

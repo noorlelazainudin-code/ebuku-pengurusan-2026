@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
@@ -97,7 +98,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#0B132B] text-[#F8F9FA] font-sans overflow-x-hidden">
+    <div className="flex min-h-screen bg-[#A9CCE3] text-[#F8F9FA] font-sans overflow-x-hidden">
       
       {/* Mobile Sidebar Overlay */}
       {isMobileMenuOpen && (
@@ -131,7 +132,7 @@ const App: React.FC = () => {
            <Header />
         </div>
         
-        <main className="flex-1 overflow-y-auto bg-[#0B132B] w-full">
+        <main className="flex-1 overflow-y-auto bg-[#A9CCE3] w-full">
           {renderContent()}
         </main>
       </div>

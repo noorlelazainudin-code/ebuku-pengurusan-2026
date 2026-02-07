@@ -317,15 +317,15 @@ export const UnitContent: React.FC<UnitContentProps> = ({ unit, type }) => {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-gray-700 pb-4 gap-4">
         <div>
-          <div className="flex items-center gap-2 text-sm text-[#C9B458] font-mono mb-1">
-             <span>{unit.toUpperCase()}</span>
+          <div className="flex items-center gap-2 text-sm text-[#0B132B] font-mono mb-1">
+             <span className="font-bold">{unit.toUpperCase()}</span>
              <span>/</span>
-             <span>{type.toUpperCase()}</span>
+             <span className="font-bold">{type.toUpperCase()}</span>
           </div>
-          <h2 className="text-3xl font-bold text-white font-montserrat">
+          <h2 className="text-3xl font-bold text-[#0B132B] font-montserrat">
             Pengurusan {type}
           </h2>
-          <p className="text-gray-400 mt-1 text-sm">
+          <p className="text-[#0B132B] mt-1 text-sm font-medium opacity-80">
             {type === 'Jawatankuasa' 
               ? `Senarai ahli jawatankuasa bagi unit ${unit}.`
               : `Kalendar dan jadual aktiviti bagi unit ${unit}.`
@@ -516,9 +516,9 @@ export const UnitContent: React.FC<UnitContentProps> = ({ unit, type }) => {
                         </>
                       ) : (
                         <>
-                          <th className="px-6 py-4 font-semibold">Nama Program / Aktiviti</th>
-                          <th className="px-6 py-4 font-semibold">Tarikh Pelaksanaan</th>
-                          <th className="px-6 py-4 font-semibold">Status</th>
+                          <th className="px-6 py-4 font-semibold text-[#C9B458]">Nama Program / Aktiviti</th>
+                          <th className="px-6 py-4 font-semibold text-[#C9B458]">Tarikh Pelaksanaan</th>
+                          <th className="px-6 py-4 font-semibold text-[#C9B458]">Status</th>
                         </>
                       )}
                       {isAdmin && <th className="px-6 py-4 font-semibold text-right">Tindakan</th>}
@@ -530,9 +530,9 @@ export const UnitContent: React.FC<UnitContentProps> = ({ unit, type }) => {
                         <tr key={item.id} className="hover:bg-[#253252] transition-colors group">
                           {type === 'Jawatankuasa' ? (
                             <>
-                              <td className="px-6 py-4 font-medium text-white">{item.role}</td>
+                              <td className="px-6 py-4 font-normal text-white">{item.role}</td>
                               <td className="px-6 py-4 text-gray-300">{item.position}</td>
-                              <td className="px-6 py-4 font-semibold text-white capitalize">
+                              <td className="px-6 py-4 font-normal text-white capitalize">
                                 {item.teacherName?.toLowerCase()}
                               </td>
                             </>
@@ -719,7 +719,7 @@ export const UnitContent: React.FC<UnitContentProps> = ({ unit, type }) => {
                       type="text" 
                       value={formData.event}
                       onChange={(e) => setFormData({...formData, event: e.target.value})}
-                      className="w-full bg-[#0B132B] border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-[#C9B458] focus:ring-1 focus:ring-[#C9B458] outline-none transition-all placeholder-gray-600"
+                      className="w-full bg-[#0B132B] border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-[#C9B458] outline-none"
                       placeholder="Masukkan nama program"
                     />
                   </div>

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { Program } from '../types';
@@ -88,10 +89,10 @@ export const ProgramView: React.FC = () => {
     <div className="p-8 space-y-8 fade-in pb-20">
       <div className="flex flex-col md:flex-row justify-between items-end border-b border-gray-700 pb-4 gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-white font-montserrat flex items-center gap-3">
+          <h2 className="text-3xl font-bold text-[#0B132B] font-montserrat flex items-center gap-3">
             <span>🎯</span> Program & Berita Sekolah
           </h2>
-          <p className="text-gray-400 mt-1">Laporan aktiviti terkini dan program akan datang.</p>
+          <p className="text-[#0B132B] font-medium opacity-80 mt-1">Laporan aktiviti terkini dan program akan datang.</p>
         </div>
         {isAdmin && (
           <button 

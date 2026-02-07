@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { Announcement, Program } from '../types';
@@ -93,7 +94,7 @@ export const Dashboard: React.FC = () => {
               <button onClick={saveEdit} className="text-green-400 text-sm">Simpan</button>
             </div>
           ) : (
-            <h2 className="text-3xl font-bold text-white font-montserrat">
+            <h2 className="text-3xl font-bold text-[#0B132B] font-montserrat">
               {siteConfig.welcomeMessage}
               {user?.role === 'adminsistem' && (
                 <button onClick={() => setIsEditing(true)} className="ml-3 text-xs text-gray-500 hover:text-[#C9B458]">
@@ -102,9 +103,9 @@ export const Dashboard: React.FC = () => {
               )}
             </h2>
           )}
-          <p className="text-gray-400 mt-1">Paparan ringkas aktiviti dan status terkini sekolah.</p>
+          <p className="text-[#0B132B] font-medium opacity-80 mt-1">Paparan ringkas aktiviti dan status terkini sekolah.</p>
         </div>
-        <div className="text-[#C9B458] text-sm font-semibold">
+        <div className="text-[#0B132B] text-sm font-bold uppercase tracking-tight">
           Sesi Persekolahan 2026
         </div>
       </div>
